@@ -1,34 +1,58 @@
 <template>
-  <div id="app">
+  <v-app id="app">
+    <v-navigation-drawer fixed :clipped="$vuetify.breakpoint.lgAndUp" app>
+      <v-list dense>
+      </v-list>
+    </v-navigation-drawer>
+    <v-toolbar color="blue darken-3" dark app :clipped-left="$vuetify.breakpoint.lgAndUp" fixed >
+      <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
+        <v-toolbar-side-icon></v-toolbar-side-icon>
+        <span class="hidden-sm-and-down">Google Contacts</span> 
+      </v-toolbar-title>
+      <v-text-field flat solo-inverted prepend-icon="search" label="Search" class="hidden-sm-and-down" ></v-text-field>
+      <v-spacer></v-spacer>
+      <v-btn icon>
+        <v-icon>apps</v-icon>
+      </v-btn>
+      <v-btn icon>
+        <v-icon>notifications</v-icon>
+      </v-btn>
+      <v-btn icon large>
+        <v-avatar size="32px" tile> <img src="https://vuetifyjs.com/static/doc-images/logo.svg" alt="Vuetify" > </v-avatar>
+      </v-btn>
+    </v-toolbar>
+<!---
+    <v-speed-dial fixed bottom right open-on-hover  v-model="fab">
+      <v-btn fab slot="activator" hover color="pink" v-model="fab" dark>
+        <v-icon>add</v-icon>
+        <v-icon>close</v-icon>
+      </v-btn>
+      <v-btn fab dark slot="activator" color="green" >
+        <v-icon>help_outline</v-icon>
+      </v-btn>
+      <span>Cadastrar Notícia</span>
+    </v-tooltip>
+    <v-tooltip left>
+      <v-btn fab slot="activator" small color="cyan">
+        <v-icon>help_outline</v-icon>
+      </v-btn>
+      <span>Cadastrar Questões</span>
+    </v-tooltip>
+  </v-speed-dial>
 
-    <!-- START NAV -->
-    <nav class="navbar is-black">
+-->
+<v-content>
+  <v-container>
+    <router-view></router-view>
+  </v-container>
+</v-content>
 
-      <div  class="navbar-menu">
-        <div class="navbar-start">
-
-          <router-link class="navbar-item" :to="{name: 'home'}">Home</router-link>
-
-          <router-link class="navbar-item" :to="{name:'vagas'}">Vagas</router-link>
-
-        </div>
-        <div class="navbar-end">
-          <div class="navbar-item has-dropdown is-hoverable">
-            <span class="navbar-link">Usuário</span>
-            <div class="navbar-dropdown is-boxed">
-              <router-link class="navbar-item" :to="'/'">Configurações</router-link>
-              <a href="/logout" class="navbar-item">Sair</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-    </nav>
-    <!-- END NAV -->
-
-    <div class="section" id="content-admim">
-      <router-view></router-view>
-    </div>
-  </div>
+</v-app>
 </template>
+<script>
+  export default {
+    data:{
+      fab:null
+    }
+  }
+</script>
