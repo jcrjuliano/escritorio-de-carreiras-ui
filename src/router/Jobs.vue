@@ -11,7 +11,7 @@
 				<td>{{ props.item.limitDate | moment("DD/MM/YYYY") }}</td>
 				<td>{{ props.item.company.companyName }}</td>
 				<td>{{ props.item.isPrivate }}</td>
-				<td>{{ props.item.published }}</td>
+				<td>{{ props.item.status }}</td>
 				<td class="justify-center layout px-0">
 					<v-icon small class="mr-2">edit</v-icon>
 					<v-icon small @click="remove(props.item)">delete</v-icon>
@@ -39,6 +39,14 @@
 		},
 		created(){	
 			this.$http.get('jobs').then(resp => this.jobs = resp.data);
+		},
+		methods:{
+			remove(item){
+				this.$http.delete(`jobs/${item.id}`).then(resp =>{
+					var indx =  this.jobs.indexOf(item)
+					this.jobs.splice(indx, 1);
+				});
+			}
 		}
 	}
 </script>

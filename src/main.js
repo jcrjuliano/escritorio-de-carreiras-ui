@@ -19,7 +19,7 @@ import 'vuetify/dist/vuetify.min.css'
 import MockApi from './mock/Api'
 
 var CustomAxios = axios.create({
-	baseURL: '/ecarreiras/',
+	baseURL: 'http://192.168.0.4:8085/ecarreiras/',
 });
 
 /*remover essa bloco para uso em produção*/
@@ -44,9 +44,16 @@ const router = new VueRouter({
 	routes,
 	mode:'history'
 });
+/*
+Vue.axios.interceptors.response.use(
+	response => return response, 
+	error=> {
+		console.log(error);
+	}
+	);*/
 
-new Vue({
-	el: '#app',
-	router,
-	render: h => h(App)
-});
+	new Vue({
+		el: '#app',
+		router,
+		render: h => h(App)
+	});
