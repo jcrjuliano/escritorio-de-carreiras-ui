@@ -3,6 +3,7 @@ import P404 from './router/404.vue';
 import P403 from './router/403.vue';
 import Jobs from './router/Jobs.vue';
 import Institutions from './router/Institutions.vue';
+import Company from './router/Company.vue';
 
 import Institution from './router/components/Institution.vue';
 var menu_tree = [
@@ -16,6 +17,7 @@ var menu_tree = [
 {path:'/licitacoes/:page', name:'licitacoes', component:Licitacoes},
 {path: '/licitacoes', redirect: {name:'licitacoes', params:{page:1}}},
 */
+{path: '/company', name:"company", component: Company },
 {path: '/institution/:id', name:'institution', component: Institution, props: true  },
 {path: '/jobs', name:'jobs', component: Jobs },
 {path: '/403', name:'403', component: P403 },

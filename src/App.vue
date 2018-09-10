@@ -1,13 +1,13 @@
-<template>
-  <v-app id="app">
-    <v-navigation-drawer fixed :clipped="$vuetify.breakpoint.lgAndUp" app>
+<template >
+  <v-app id="app" v-if="is_login">
+    <v-navigation-drawer fixed app  :clipped="$vuetify.breakpoint.lgAndUp">
       <v-list dense>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="blue darken-3" dark app :clipped-left="$vuetify.breakpoint.lgAndUp" fixed >
+    <v-toolbar color="blue darken-3" dark app fixed  :clipped-left="$vuetify.breakpoint.lgAndUp" >
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
         <v-toolbar-side-icon></v-toolbar-side-icon>
-        <span class="hidden-sm-and-down">Google Contacts</span> 
+        <span class="hidden-sm-and-down">Escritório de Carreiras</span> 
       </v-toolbar-title>
       <v-text-field flat solo-inverted prepend-icon="search" label="Search" class="hidden-sm-and-down" ></v-text-field>
       <v-spacer></v-spacer>
@@ -48,11 +48,26 @@
 </v-content>
 
 </v-app>
+<v-app id="app" v-else>
+  <login-page></login-page>
+</v-app>
 </template>
 <script>
-  export default {
-    data:{
+import LoginPage from './router/Login.vue';
+export default {
+  components: {
+    'login-page':LoginPage
+  },
+  computed:{
+    is_login(){
+      return true;
+      return Boolean(this.$cookies.token);
+    }
+  },
+  data(){
+    return {
       fab:null
     }
   }
+}
 </script>

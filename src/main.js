@@ -4,7 +4,8 @@ import Vuetify from 'vuetify'
 
 import VueRouter from 'vue-router'
 import VueAxios from 'vue-axios'
-import VueMoment from 'vue-moment' 
+import VueMoment from 'vue-moment'
+import VueReactiveCookie from 'vue-reactive-cookie'
 
 /* Mock API */
 import MockAdapter from 'axios-mock-adapter';
@@ -30,20 +31,30 @@ if(['localhost:8080'].indexOf(window.location.host) > -1){
 
 	MockApi.forEach((obj)=>{
 		if(obj.method == 'GET')	mock.onGet(obj.route).reply(200, obj.data);
-	});	
+		else if(obj.method == 'POST') mock.onPost(obj.route).reply(200, obj.data);
+	});
 
 }
 
 Vue.use(VueRouter)
 Vue.use(Vuetify)
-Vue.use(VueMoment);
+Vue.use(VueMoment)
 Vue.use(VueAxios, CustomAxios)
+Vue.use(VueReactiveCookie)
 
 const routes  = CustomRoutes.getRoutes();
 const router = new VueRouter({
 	routes,
 	mode:'history'
 });
+
+
+new Vue({
+	el: '#app',
+	router,
+	render: h => h(App)
+});
+
 /*
 Vue.axios.interceptors.response.use(
 	response => return response, 
@@ -51,9 +62,3 @@ Vue.axios.interceptors.response.use(
 		console.log(error);
 	}
 	);*/
-
-	new Vue({
-		el: '#app',
-		router,
-		render: h => h(App)
-	});
